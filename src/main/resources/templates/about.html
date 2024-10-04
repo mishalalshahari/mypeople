@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{::title}, ~{::script})}">
 <head>
-    <meta charset="UTF-8">
-    <title>MyPeople - About</title>
+    <title>About - MyPeople</title>
 </head>
 <body>
-    <h1>This is baout page</h1>
-    <!--using fragments-->
-    <div th:insert="~{base :: parent}"></div>
-<!--<div th:replace="~{base :: parent}"></div>-->
+    <div id="content">
+        <h1>Welcome to About page</h1>
+    </div>
+    <script>
+        console.log("about page");
+    </script>
 </body>
 </html>

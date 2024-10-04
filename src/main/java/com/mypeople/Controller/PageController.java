@@ -23,9 +23,9 @@ public class PageController {
     }
 
     //about route
-    @RequestMapping("/service")
+    @RequestMapping("/services")
     public String servicePage() {
         System.out.println("Service page is loading");
-        return "service";
+        return "services";
     }
 }
