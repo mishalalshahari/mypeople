@@ -5,3 +5,5 @@ npx tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources
 ```
 2. Include output.css in your html
 3. If you want Flowbite: include css and js using cdn
+
+fixed green square bug
