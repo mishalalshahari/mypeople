@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function changeTheme() {
     //set to webpage
-    changePageTheme(currentTheme);
+    // changePageTheme(currentTheme);
+    changePageTheme(currentTheme, currentTheme);
 
     //set the listener to change theme
     const themeButton = document.querySelector('#theme_change');
@@ -66,7 +67,8 @@ function changePageTheme(theme, oldTheme) {
     //update in local storage
     setTheme(currentTheme);
     //remove the current theme
-    document.querySelector('html').classList.remove(oldTheme);
+    // document.querySelector('html').classList.remove(oldTheme);
+    document.querySelector('html').classList.remove("light", "dark");
     //set the current theme
     document.querySelector('html').classList.add(theme);
 }
