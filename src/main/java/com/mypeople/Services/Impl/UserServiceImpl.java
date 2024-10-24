@@ -2,11 +2,13 @@ package com.mypeople.Services.Impl;
 
 import com.mypeople.Entities.User;
 import com.mypeople.Exceptions.ResourceNotFoundException;
+import com.mypeople.Helpers.AppConstants;
 import com.mypeople.Repositories.UserRepo;
 import com.mypeople.Services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -29,6 +34,10 @@ public class UserServiceImpl implements UserService {
         //password encode
         //user.setPassword(userId);
         //user.setProfilePic(user.getProfilePic());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //set the role
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
+        logger.info(user.getProvider().toString());
         return userRepo.save(user);
     }
 
