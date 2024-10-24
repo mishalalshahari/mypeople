@@ -6,12 +6,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
@@ -29,6 +32,7 @@ public class SecurityConfig {
     @Autowired
     private SecurityCustomUserDetailService userDetailsService;
 
+    //configuration of authentication provider
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -37,6 +41,23 @@ public class SecurityConfig {
         //password encoder object
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        //configuration
+        //configured which route to be public or private
+        httpSecurity.authorizeHttpRequests(authorize->{
+            //authorize.requestMatchers("/home","about","services","/register").permitAll();
+            authorize.requestMatchers("/user/**").authenticated();
+            authorize.anyRequest().permitAll();
+        });
+
+        //form default login
+        //if we have to change anything then we have to look for form related
+        httpSecurity.formLogin(Customizer.withDefaults());
+
+        return httpSecurity.build();
     }
 
     @Bean
