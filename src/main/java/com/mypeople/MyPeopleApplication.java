@@ -12,6 +12,8 @@ public class MyPeopleApplication {
         System.setProperty("MYSQL_PASSWORD", dotenv.get("MYSQL_PASSWORD"));
         System.setProperty("GOOGLE_CLIENT_ID", dotenv.get("GOOGLE_CLIENT_ID"));
         System.setProperty("GOOGLE_CLIENT_SECRET", dotenv.get("GOOGLE_CLIENT_SECRET"));
+        System.setProperty("GITHUB_CLIENT_ID", dotenv.get("GITHUB_CLIENT_ID"));
+        System.setProperty("GITHUB_CLIENT_SECRET", dotenv.get("GITHUB_CLIENT_SECRET"));
         SpringApplication.run(MyPeopleApplication.class, args);
     }
 
