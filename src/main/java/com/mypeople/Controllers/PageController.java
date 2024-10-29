@@ -22,11 +22,13 @@ public class PageController {
     @Autowired
     private UserService userService;
 
+    //pre home page
     @GetMapping("/")
     public String index() {
         return "redirect:/home";
     }
 
+    //home route
     @RequestMapping("/home")
     public String homePage(Model model) {
 
@@ -64,12 +66,10 @@ public class PageController {
     }
 
     //register route
+    //this is registration controller - view
     @GetMapping("/register")
     public String register(Model model) {
         UserForm userForm = new UserForm();
-        //we can also add default data
-//        userForm.setName("Mishal Al");
-//        userForm.setAbout("main mishal hu");
         model.addAttribute("userForm", userForm);
         return "register";
     }
