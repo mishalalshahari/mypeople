@@ -69,34 +69,20 @@ public class SecurityConfig {
         //form default login
         //if we have to change anything then we have to look for form related
         httpSecurity.formLogin(formLogin->{
-            //formLogin.loginPage("/login");
-            //formLogin.loginProcessingUrl("/authenticate");
-            formLogin.loginPage("/login").loginProcessingUrl("/authenticate").successForwardUrl("/user/dashboard");
+            formLogin.loginPage("/login").loginProcessingUrl("/authenticate").successForwardUrl("/user/profile");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
-//            formLogin.failureHandler(new AuthenticationFailureHandler() {
-//                @Override
-//                public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-//
-//                }
-//            });
-//            formLogin.successHandler(new AuthenticationSuccessHandler() {
-//                @Override
-//                public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//
-//                }
-//            });
-
         });
-
-        httpSecurity.csrf(AbstractHttpConfigurer::disable);
-        httpSecurity.logout(logoutForm-> logoutForm.logoutUrl("/logout").logoutSuccessUrl("/login?logout=true"));
 
         //oauth2 configurations
         httpSecurity.oauth2Login(oauth->{
             oauth.loginPage("/login");
             oauth.successHandler(successHandler);
         });
+
+        //logout
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        httpSecurity.logout(logoutForm-> logoutForm.logoutUrl("/logout").logoutSuccessUrl("/login?logout=true"));
 
         return httpSecurity.build();
     }

@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{::title}, ~{::script})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Profile - MyPeople</title>
+    <title th:text="${loggedInUser.name}+' - MyPeople'">Home - MyPeople</title>
 </head>
 <body>
-    <h1>This is user profile page</h1>
-    <h1 th:text="${loggedInUser.name}"></h1>
-    <h1 th:text="${loggedInUser.email}"></h1>
-    <!--if user is logged in-->
+<div id="content">
+    <!--Sidebar-->
     <div th:if="${loggedInUser}">
-        <h1>Hello, </h1>
-        <h1 th:text="${loggedInUser.name}"></h1>
+        <div th:replace="~{user/sidebar :: sidebar}"></div>
     </div>
+    <div class="sm:pl-64 pt-20" style="height: 1000px">
+        <div class="flex justify-center flex-col items-center">
+            <h1 class="text-5xl">Welcome to Profile page</h1>
+            <p>lorem wrftgeredftgerf</p>
+        </div>
+    </div>
+</div>
+<script>
+    console.log("profile page");
+</script>
 </body>
 </html>
