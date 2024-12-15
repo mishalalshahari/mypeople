@@ -22,11 +22,12 @@ public class Contact {
     private String email;
     private String phoneNumber;
     private String address;
-    private String profilePic;
+    private String linkedInLink;
+    private String githubLink;
     @Lob
     private String description;
+    private String profilePic;
     private boolean favorite = false;
-    private String linkedInLink;
 
     @ManyToOne
     private User user;
